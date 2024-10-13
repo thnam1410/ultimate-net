@@ -1,0 +1,6 @@
+@UltimateNet_HostAddress = http://localhost:5003
+
+GET {{UltimateNet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
