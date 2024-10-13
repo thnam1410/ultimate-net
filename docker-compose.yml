@@ -1,6 +1,0 @@
-﻿services:
-  ultimatenet:
-    image: ultimatenet
-    build:
-      context: .
-      dockerfile: Dockerfile
