@@ -1,20 +1,24 @@
-using ApiGateway.Extensions;
-
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-builder.AddRouteConfigs();
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
-{   
-    app.MapOpenApi();
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
-await app.UseOcelot();
+app.MapReverseProxy();
+
+app.MapHealthChecks("health");
 
 app.Run();
