@@ -2,7 +2,7 @@
 
 public record CurrentUserDto(
     int Id,
-    string UserName,
-    string Role,
-    string[] Scopes
+    string UserName
+    // string Role,
+    // string[] Scopes
 );

@@ -1,8 +1,11 @@
-﻿using System.Security.Claims;
+﻿using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using Identity.API.Domain.Dtos;
 using Identity.API.Services;
 using MediatR;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using UltimateNet.Shared.Endpoint;
 
 namespace Identity.API.UseCases.Queries;
@@ -19,18 +22,26 @@ public record GetCurrentUserQuery : IRequest<CurrentUserDto>
 {
 }
 
-internal class GetCurrentUserQueryHandler(ICurrentUser currentUser) : IRequestHandler<GetCurrentUserQuery, CurrentUserDto>
+internal class GetCurrentUserQueryHandler(
+    ICurrentUser currentUser,
+    ILogger<GetCurrentUserQueryHandler> logger,
+    IConfiguration config
+) : IRequestHandler<GetCurrentUserQuery, CurrentUserDto>
 {
     public async Task<CurrentUserDto> Handle(
         GetCurrentUserQuery request,
         CancellationToken cancellationToken
     )
     {
+        var claims = currentUser.GetClaimsPrincipal().Claims.ToDictionary(c => c.Type, c => c.Value);
+        logger.LogInformation($"Claim ne {claims.ToString()}");
+        logger.LogInformation("abbasdasdasd");
+        logger.LogInformation(config.GetConnectionString("ultimate-net-realm"));
         return new CurrentUserDto(
             1,
-            currentUser.UserName,
-            currentUser.Role,
-            currentUser.Scopes
+            currentUser.UserName
+            // currentUser.Role,
+            // currentUser.Scopes
         );
     }
 }

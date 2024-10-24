@@ -22,4 +22,6 @@ public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUse
     public virtual string UserName => FindClaimOrThrow<string>(JwtRegisteredClaimNames.Name);
     public virtual string Role => FindClaimOrThrow<string>("Role");
     public virtual string[] Scopes => FindClaimOrThrow<string>("Scope").Split(",");
+
+    public virtual ClaimsPrincipal GetClaimsPrincipal() => this.User ?? throw new UnauthorizedAccessException("User not found!");
 }

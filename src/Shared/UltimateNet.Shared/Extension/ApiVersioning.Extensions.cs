@@ -6,7 +6,7 @@ namespace UltimateNet.Shared.Extension;
 
 public static class Extensions
 {
-    public static IHostApplicationBuilder AddDefaultOpenApi(
+    public static IHostApplicationBuilder AddApiVersioning(
         this IHostApplicationBuilder builder,
         IApiVersioningBuilder? apiVersioning = default)
     {

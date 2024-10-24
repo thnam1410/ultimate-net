@@ -3,18 +3,18 @@ using Asp.Versioning.Builder;
 using FluentValidation;
 using Identity.API.Services;
 using Microsoft.Extensions.Hosting;
+using UltimateNet.ServiceDefaults;
 using UltimateNet.Shared.Cqrs.Behaviours;
-using UltimateNet.Shared.Endpoint;
 using UltimateNet.Shared.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenWithAuth(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.AddLogConfigs();
-
-builder.AddDefaultOpenApi();
+builder.AddApiVersioning();
 builder.Services.AddEndpoints(typeof(Program).Assembly);
 
 builder.AddDefaultAuthentication();
@@ -36,6 +36,7 @@ builder.Services.AddTransient<ICurrentUser, CurrentUser>();
 
 var app = builder.Build();
 
+app.MapDefaultEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -45,6 +46,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseLoggerConfigs();
+
+app.UseDefaultAuth();
 
 ApiVersionSet apiVersionSet = app.NewApiVersionSet("Identity")
     .HasApiVersion(new ApiVersion(1))

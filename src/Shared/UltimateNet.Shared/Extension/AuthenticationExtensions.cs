@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
@@ -10,28 +14,30 @@ public static class AuthenticationExtensions
     public static IServiceCollection AddDefaultAuthentication(this IHostApplicationBuilder builder)
     {
         var services = builder.Services;
-        var configuration = builder.Configuration;
-        
-        var jwtIssuer = builder.Configuration.GetRequiredValue("Jwt:Issuer");
-        var jwtSecretKey = builder.Configuration.GetRequiredValue("Jwt:SecretKey");
 
-        services.AddAuthentication().AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters = new TokenValidationParameters()
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(o =>
             {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = jwtIssuer,
-                ValidAudience = jwtIssuer,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey)),
-                RequireExpirationTime = true,
-            };
-        });
+                o.RequireHttpsMetadata = false;
+                o.Audience = builder.Configuration.GetRequiredValue("Authentication:Audience");
+                o.MetadataAddress = builder.Configuration.GetRequiredValue("Authentication:MetadataAddress");
+                o.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidIssuer = builder.Configuration.GetRequiredValue("Authentication:ValidIssuer"),
+                };
+            });
 
         services.AddAuthorization();
 
         return services;
+    }
+
+    public static WebApplication UseDefaultAuth(this WebApplication app)
+    {
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
+        return app;
     }
 }
