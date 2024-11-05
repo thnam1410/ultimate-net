@@ -8,12 +8,17 @@
 
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
+        <PackageReference Include="Duende.AccessTokenManagement" Version="3.0.0" />
         <PackageReference Include="FluentValidation" Version="11.10.0" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="Keycloak.AuthServices.Authentication" Version="2.5.3" />
+        <PackageReference Include="Keycloak.AuthServices.Authorization" Version="2.5.3" />
+        <PackageReference Include="Keycloak.AuthServices.Sdk" Version="2.5.3" />
         <PackageReference Include="MediatR" Version="12.4.1" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
         <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.10" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10"/>
+        <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.10.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
     </ItemGroup>
 
@@ -26,6 +31,10 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\UltimateNet.ServiceDefaults\UltimateNet.ServiceDefaults.csproj" />
       <ProjectReference Include="..\..\Shared\UltimateNet.Shared\UltimateNet.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\" />
     </ItemGroup>
 
 </Project>

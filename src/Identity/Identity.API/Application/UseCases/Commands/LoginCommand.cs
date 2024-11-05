@@ -30,18 +30,11 @@ internal class LoginValidator : AbstractValidator<LoginCommand>
 }
 
 internal class LoginHandler(
-    JwtTokenService jwtTokenService,
-    ILogger<LoginHandler> logger,
-    IConfiguration configuration
+    ILogger<LoginHandler> logger
 ) : IRequestHandler<LoginCommand, AuthTokenDto>
 {
     public async Task<AuthTokenDto> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Handling login request for user {UserName}", request.UserName);
-        logger.LogInformation(configuration["Authentication:Audience"]);
-        logger.LogInformation(configuration["Authentication:MetadataAddress"]);
-        logger.LogInformation(configuration["Authentication:ValidIssuer"]);
-
         return new AuthTokenDto("aaa", 123);
     }
 }

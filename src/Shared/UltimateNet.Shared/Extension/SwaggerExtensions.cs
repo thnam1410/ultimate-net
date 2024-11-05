@@ -29,7 +29,6 @@ public static class SwaggerExtensions
                         {
                             { "openid", "openid" },
                             { "profile", "profile" },
-                            { "audience-scope", "audience-scope" },
                         }
                     }
                 }

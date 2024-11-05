@@ -34,9 +34,7 @@ internal class GetCurrentUserQueryHandler(
     )
     {
         var claims = currentUser.GetClaimsPrincipal().Claims.ToDictionary(c => c.Type, c => c.Value);
-        logger.LogInformation($"Claim ne {claims.ToString()}");
-        logger.LogInformation("abbasdasdasd");
-        logger.LogInformation(config.GetConnectionString("ultimate-net-realm"));
+
         return new CurrentUserDto(
             1,
             currentUser.UserName

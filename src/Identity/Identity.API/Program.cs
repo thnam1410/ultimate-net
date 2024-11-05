@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using Asp.Versioning.Builder;
 using FluentValidation;
+using Identity.API.Infrastructure;
 using Identity.API.Services;
 using Microsoft.Extensions.Hosting;
 using UltimateNet.ServiceDefaults;
@@ -16,9 +17,7 @@ builder.Services.AddHttpContextAccessor();
 builder.AddLogConfigs();
 builder.AddApiVersioning();
 builder.Services.AddEndpoints(typeof(Program).Assembly);
-
-builder.AddDefaultAuthentication();
-
+builder.AddAuth();
 builder.Services.AddProblemDetails();
 
 builder.Services.AddMediatR(cfg =>
