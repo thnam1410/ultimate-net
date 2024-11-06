@@ -1,10 +1,17 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 
 namespace Identity.API.Services;
 
 public interface ICurrentUser
 {
-    string UserName { get; }
+    Guid Id { get; }
+    // string UserName { get; }
+    string Email { get; }
+    
+    string FirstName { get; }
+    string LastName { get; }
+    string FullName { get; }
     string Role { get; }
     string[] Scopes { get; }
 

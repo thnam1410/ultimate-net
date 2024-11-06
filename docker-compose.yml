@@ -1,3 +1,5 @@
+include:
+  - kong.docker-compose.yml
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:latest

@@ -34,7 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\" />
+      <Folder Include="Application\UseCases\Commands\" />
     </ItemGroup>
 
 </Project>

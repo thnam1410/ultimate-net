@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using Identity.API.Domain.Dtos;
@@ -33,12 +34,13 @@ internal class GetCurrentUserQueryHandler(
         CancellationToken cancellationToken
     )
     {
-        var claims = currentUser.GetClaimsPrincipal().Claims.ToDictionary(c => c.Type, c => c.Value);
-
         return new CurrentUserDto(
-            1,
-            currentUser.UserName
-            // currentUser.Role,
+            currentUser.Id,
+            currentUser.Email,
+            currentUser.FirstName,
+            currentUser.LastName,
+            currentUser.FullName
+            // currentUser.Role
             // currentUser.Scopes
         );
     }
