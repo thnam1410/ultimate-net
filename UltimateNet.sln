@@ -12,13 +12,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{ED
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{497079BB-C26D-435D-B10D-C0AE966836CA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{7623F0CE-CA31-47FD-9FF7-69C5B687BD92}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{7623F0CE-CA31-47FD-9FF7-69C5B687BD92}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{DFA2B435-C5C6-4435-9455-26D51622A068}"
+	ProjectSection(SolutionItems) = preProject
+		src\Shared\MigrateDbContextExtensions.cs = src\Shared\MigrateDbContextExtensions.cs
+		src\Shared\ActivityExtensions.cs = src\Shared\ActivityExtensions.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{25D78E1B-13F3-48F7-8175-B5EA6FC43735}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.Api", "src\Product\Product.Api\Product.Api.csproj", "{703C626D-8610-4D7C-BCC7-C713CEA61FC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api", "src\Catalog\Catalog.Api\Catalog.Api.csproj", "{703C626D-8610-4D7C-BCC7-C713CEA61FC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "src\ApiGateway\ApiGateway.csproj", "{5EA303DB-D6B9-441C-B5DC-5B88789E81D5}"
 EndProject
@@ -27,6 +31,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateNet.Aspire", "src\Aspire\UltimateNet.Aspire\UltimateNet.Aspire.csproj", "{AA09820F-6E2C-418E-BDC6-16813335A762}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateNet.ServiceDefaults", "src\Shared\UltimateNet.ServiceDefaults\UltimateNet.ServiceDefaults.csproj", "{91B97046-DCA1-44D1-8278-BB8FFE19C448}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateNet.Domain.Shared", "src\Shared\UltimateNet.Domain.Shared\UltimateNet.Domain.Shared.csproj", "{65D8A7AA-0D47-4358-98AB-3F2437079C19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +64,10 @@ Global
 		{91B97046-DCA1-44D1-8278-BB8FFE19C448}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91B97046-DCA1-44D1-8278-BB8FFE19C448}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91B97046-DCA1-44D1-8278-BB8FFE19C448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65D8A7AA-0D47-4358-98AB-3F2437079C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D8A7AA-0D47-4358-98AB-3F2437079C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D8A7AA-0D47-4358-98AB-3F2437079C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D8A7AA-0D47-4358-98AB-3F2437079C19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EDAA0180-6647-4C81-82C6-24530DC9F859} = {BF62406E-5E0D-4058-87DF-8649C17ACC3A}
@@ -72,5 +82,6 @@ Global
 		{B867D91A-4491-471F-B5AD-85FE5AFEC04C} = {BF62406E-5E0D-4058-87DF-8649C17ACC3A}
 		{AA09820F-6E2C-418E-BDC6-16813335A762} = {B867D91A-4491-471F-B5AD-85FE5AFEC04C}
 		{91B97046-DCA1-44D1-8278-BB8FFE19C448} = {DFA2B435-C5C6-4435-9455-26D51622A068}
+		{65D8A7AA-0D47-4358-98AB-3F2437079C19} = {DFA2B435-C5C6-4435-9455-26D51622A068}
 	EndGlobalSection
 EndGlobal
