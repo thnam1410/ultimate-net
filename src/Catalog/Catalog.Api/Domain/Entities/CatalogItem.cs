@@ -30,4 +30,30 @@ public sealed class CatalogItem : Entity
 
     // Maximum number of units that can be in-stock at any time (due to physicial/logistical constraints in warehouses)
     public int MaxStockThreshold { get; set; }
+
+    private CatalogItem(){}
+
+    public static CatalogItem Create(
+        string name,
+        string description,
+        decimal price,
+        int catalogTypeId,
+        int catalogBrandId,
+        int availableStock = 100,
+        int restockThreshold = 200,
+        int maxStockThreshold = 10
+        )
+    {
+        return new CatalogItem
+        {
+            Name = name,
+            Description = description,
+            Price = price,
+            CatalogTypeId = catalogTypeId,
+            CatalogBrandId = catalogBrandId,
+            AvailableStock = availableStock,
+            RestockThreshold = restockThreshold,
+            MaxStockThreshold = maxStockThreshold,
+        };
+    }
 }

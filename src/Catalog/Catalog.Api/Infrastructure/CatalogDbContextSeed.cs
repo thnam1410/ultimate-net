@@ -14,7 +14,7 @@ public class CatalogDbContextSeed(
 
         context.Database.OpenConnection();
         ((NpgsqlConnection)context.Database.GetDbConnection()).ReloadTypes();
-        
+
         if (!context.CatalogItems.Any())
         {
             var sourcePath = System.IO.Path.Combine(contentRootPath, "Setup", "catalog.json");
@@ -36,18 +36,22 @@ public class CatalogDbContextSeed(
             var brandIdsByName = await context.CatalogBrands.ToDictionaryAsync(x => x.Brand, x => x.Id);
             var typeIdsByName = await context.CatalogTypes.ToDictionaryAsync(x => x.Type, x => x.Id);
 
-            var catalogItems = sourceItems.Select(source => new CatalogItem
-            {
-                Id = source.Id,
-                Name = source.Name,
-                Description = source.Description,
-                Price = source.Price,
-                CatalogBrandId = brandIdsByName[source.Brand],
-                CatalogTypeId = typeIdsByName[source.Type],
-                AvailableStock = 100,
-                MaxStockThreshold = 200,
-                RestockThreshold = 10,
-            }).ToArray();
+            var catalogItems = sourceItems.Select(source =>
+                {
+                    var item = CatalogItem.Create(
+                        source.Name,
+                        source.Description,
+                        source.Price,
+                        brandIdsByName[source.Brand],
+                        typeIdsByName[source.Type],
+                        100,
+                        200,
+                        10);
+                    item.Id = source.Id;
+
+                    return item;
+                })
+                .ToArray();
 
             // if (catalogAI.IsEnabled)
             // {
@@ -64,7 +68,7 @@ public class CatalogDbContextSeed(
             await context.SaveChangesAsync();
         }
     }
-    
+
     private class CatalogSourceEntry
     {
         public int Id { get; set; }

@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGraphQL();
+app.MapGraphQL("/api/graphql");
 
 app.UseLoggerConfigs();
 

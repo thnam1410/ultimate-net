@@ -12,7 +12,7 @@ public static class Extensions
         builder.Services
             .AddGraphQLServer()
             .AddQueryType<CatalogQuery>()
-            // .AddMutationType<CatalogMutation>()
+            .AddMutationType<CatalogMutation>()
             .AddProjections()
             .AddFiltering()
             .AddSorting()

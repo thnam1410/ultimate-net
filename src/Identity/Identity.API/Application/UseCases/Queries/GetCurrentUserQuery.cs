@@ -16,6 +16,7 @@ public class GetCurrentUserEndpoint : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("me", async (ISender sender) => await sender.Send(new GetCurrentUserQuery())).RequireAuthorization();
+        app.MapGet("test", () => "Hello World!");
     }
 }
 

@@ -32,6 +32,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<Program>(includeInternalTyp
 
 builder.Services.AddSingleton<JwtTokenService>();
 builder.Services.AddTransient<ICurrentUser, CurrentUser>();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -48,12 +49,14 @@ app.UseLoggerConfigs();
 
 app.UseDefaultAuth();
 
+app.UseCors();
+    
 ApiVersionSet apiVersionSet = app.NewApiVersionSet("Identity")
     .HasApiVersion(new ApiVersion(1))
     .ReportApiVersions()
     .Build();
 
-var identityVersionedGroup = app.MapGroup("api/v{version:apiVersion}/identity")
+var identityVersionedGroup = app.MapGroup("api/v{version:apiVersion}")
     .WithApiVersionSet(apiVersionSet);
 
 app.MapEndpoints(identityVersionedGroup);
